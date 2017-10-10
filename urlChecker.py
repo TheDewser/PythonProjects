@@ -3,7 +3,6 @@ import httplib
 
 with open("urls-to-check.txt", "r") as f:
     urls = f.read().splitlines()
-    #urlList2 = []
     for url in urls:
         c = httplib.HTTPConnection(url)
         c.request("HEAD", '')
