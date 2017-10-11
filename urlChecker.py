@@ -1,13 +1,18 @@
 #!/usr/bin/python
 import httplib
-
-with open("urls-to-check.txt", "r") as f:
-    urls = f.read().splitlines()
-    for url in urls:
-        try:
-            c = httplib.HTTPConnection(url)
-            c.request("HEAD", '')
-            if c.getresponse().status == 200:
-                print(url+' - ' +'Web site exists')
-        except:
-            print(url+' - '+'Site not available')
+import csv
+with open('url-results.csv', 'wb') as csvfile:
+    urlwriter = csv.writer(csvfile, delimiter=',')
+    urlwriter.writerow(['URL', 'Status'])
+    with open("urls-to-check.txt", "r") as f:
+        urls = f.read().splitlines()
+        for url in urls:
+            try:
+                c = httplib.HTTPConnection(url)
+                c.request("HEAD", '')
+                if c.getresponse().status == 200:
+                    #print(url+' - ' +'Web site exists')
+                    urlwriter.writerow([url,'Web Site Exists'])
+            except:
+                #print(url+' - '+'Site not available')
+                urlwriter.writerow([url,'Offline'])
