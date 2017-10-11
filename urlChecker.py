@@ -9,7 +9,5 @@ with open("urls-to-check.txt", "r") as f:
             c.request("HEAD", '')
             if c.getresponse().status == 200:
                 print(url+' - ' +'Web site exists')
-            #else:
-            #    print('Web site does not exist')
         except:
             print(url+' - '+'Site not available')
