@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import httplib
 import csv
-with open('url-results.csv', 'wb') as csvfile:
+with open('urls-results.csv', 'wb') as csvfile:
     urlwriter = csv.writer(csvfile, delimiter=',')
     urlwriter.writerow(['URL', 'Status'])
     with open("urls-to-check.txt", "r") as f:
@@ -11,7 +11,7 @@ with open('url-results.csv', 'wb') as csvfile:
                 c = httplib.HTTPConnection(url)
                 c.request("HEAD", '')
                 if c.getresponse().status == 200:
-                    #print(url+' - ' +'Web site exists')
+                    #print(url+' - ' +'Web site exists') #--> uncomment the print() if you want to watch process
                     urlwriter.writerow([url,'Web Site Exists'])
             except:
                 #print(url+' - '+'Site not available')
